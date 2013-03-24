@@ -1,0 +1,44 @@
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/WEB-INF/template.xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core">
+    <ui:define name="titulo"> Registro de usuario </ui:define>
+    <ui:define name="corpo" >
+        <center>
+            <h:form >
+                <!--<p:growl id="mensagens" showDetail="true" />-->
+                 <p:focus for="nome"/> 
+                <p:panel header="Datos usuario">
+                    <h:panelGrid columns="2">
+
+                        <h:outputText value="Nombre:" />
+                        <p:inputText id="nome" value="#{pessoaBean.pessoa.nome}" 
+                                     required="true" requiredMessage="Hay de digitar tu nombre."/>
+
+                        <h:outputText value="Email (será tu nombre de usuario):" />
+                        <p:inputText  value="#{pessoaBean.pessoa.email}" 
+                                      required="true" requiredMessage="Hay de digitar tu correo."/>
+
+                        <h:outputText value="Data Nascimiento:" />
+                        <p:calendar value="#{pessoaBean.pessoa.dataNascimento}" 
+                                    required="true" requiredMessage="Hay de inserir tu data de nascimiento."/>
+
+                        <h:outputText value="Contraseña:" />
+                        <p:password value="#{pessoaBean.pessoa.senha}" promptLabel="Digite uma senha segura" 
+                                    goodLabel="Boa" weakLabel="Ruim" strongLabel="Excelente" feedback="true" 
+                                    required="true" requiredMessage="Hay de digitar una contaseña."/>
+
+                    </h:panelGrid>
+                    <center>
+                        <p:commandButton value="Salvar" action="#{pessoaBean.salvar()}" 
+                                         icon="ui-icon-disk" ajax="false" update="mensagens"/>
+                    </center>                
+                </p:panel>
+                <p:growl id="mensagens" showDetail="true" />
+            </h:form>
+        </center>
+    </ui:define>
+</ui:composition>
+
