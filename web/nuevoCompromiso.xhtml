@@ -8,37 +8,41 @@
     <ui:define name="corpo" >
         <center>
             <h:form >
-                <p:panel header="Nuevo Compromiso de "> <!-- colocar aqui o nome do fulano -->
-                    <h:panelGrid  columns="2" cellpadding="5">
-                       
+                <p:panel header="Nuevo Compromiso de #{compromisoBean.user.nome}"> <!-- colocar aqui o nome do fulano -->
+                    <h:panelGrid  columns="2" >
+
                         <h:outputText value="Título:" />
-                        <p:inputText  value="" size="100"/>
+                        <p:inputText  value="#{compromisoBean.compromisso.titulo}" size="100"/>
 
                         <h:outputText value="Descrición:" />
-                        <p:inputTextarea rows="5" cols="50"  maxlength="200"  counter="counter"    
+                        <p:inputTextarea value="#{compromisoBean.compromisso.descricao}"
+                                         rows="5" cols="71"  maxlength="200"  counter="counter"    
                                          counterTemplate="{0} characters restantes" autoResize="false" />    
                         <h:outputText value=" "/>
                         <h:outputText id="counter" style="font-size: 9px ;left: 50%;width: 100px;
-                                      margin-left: 120px;  text-align:center"/> 
-
-                        <h:outputText value="Importancia" />
-                        <p:selectOneMenu id="selNumeroSemanas" required="true"
-                                         value="">
-                            <f:selectItem itemLabel="--Selecione--"/>
-                            <f:selectItem itemLabel="Baja" itemValue="1" />
-                            <f:selectItem itemLabel="Mediana" itemValue="2" />
-                            <f:selectItem itemLabel="Alta" itemValue="3" />
-                        </p:selectOneMenu>   
-                        <h:outputText value="Dia:" />
-                        <p:calendar value="#{pessoaBean.pessoa.dataNascimento}" 
-                                    required="true" requiredMessage="Hay de inserir tu data de nascimiento."/>
-                        <h:outputLabel value="Hora"/>
-                        <p:inputMask mask="99h:99min" value=""/>
+                                      margin-left: 190px;  text-align:center"/> 
                         
+                    </h:panelGrid>
+
+                    <h:panelGrid  columns="4" cellpadding="5">
+                        <center>
+                            <h:outputText value="Importancia:" />
+                            <p:rating id="selNumeroSemanas" required="true"
+                                      value="#{compromisoBean.compromisso.status}"/>
+                        </center>
+                    </h:panelGrid>
+                        <h:panelGrid  columns="4" cellpadding="5">
+                        <h:outputText value="Dia:" />
+                        <p:calendar value="#{compromisoBean.compromisso.dia}" navigator="true"                                              
+                                    required="true"  locale="pt_BR" pattern="dd/MM/yyyy"
+                                    requiredMessage="Hay de inserir tu data de nascimiento."/>
+                        <h:outputLabel value="Hora:"/>
+                        <p:inputMask mask="99h:99min" value="#{compromisoBean.compromisso.hora}"/>
+
 
                     </h:panelGrid>
-                     <center>
-                        <p:commandButton value="Salvar" action="#{pessoaBean.salvar()}" 
+                    <center>
+                        <p:commandButton value="Salvar" action="#{compromisoBean.salvar()}" 
                                          icon="ui-icon-disk" ajax="false" update="mensagens"/>
                     </center> 
                 </p:panel>

@@ -33,6 +33,7 @@ public class RedirecionamentosBean {
     
     public String logout()
     {
+        CompromisoBean.usuario=null;
         return "index?faces-redirect=true";
     }
     

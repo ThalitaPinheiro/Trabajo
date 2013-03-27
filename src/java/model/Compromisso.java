@@ -5,7 +5,6 @@
 package model;
 
 import java.io.Serializable;
-import java.sql.Time;
 import java.util.Date;
 import javax.persistence.*;
 /**
@@ -25,7 +24,7 @@ public class Compromisso implements Serializable {
     private String descricao;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date dia;
-    private Time hora;
+    private String hora;
     private Integer status;
     @ManyToOne
     @JoinColumn(name = "idpessoa")
@@ -69,11 +68,11 @@ public class Compromisso implements Serializable {
         this.dia = dia;
     }
 
-    public Time getHora() {
+    public String getHora() {
         return hora;
     }
 
-    public void setHora(Time hora) {
+    public void setHora(String hora) {
         this.hora = hora;
     }
 

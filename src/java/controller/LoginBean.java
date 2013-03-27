@@ -17,6 +17,7 @@ import seguridad.Seguridad;
 public class LoginBean {
     private Pessoa user;
     private PessoaDAOImpl dao;
+    private boolean camposNecessarios=true;
 
     public LoginBean() {
         user = new Pessoa();
@@ -39,35 +40,38 @@ public class LoginBean {
         this.dao = dao;
     }
 
+    public boolean isCamposNecessarios() {
+        return camposNecessarios;
+    }
+
+    public void setCamposNecessarios(boolean camposNecessarios) {
+        this.camposNecessarios = camposNecessarios;
+    }
+
       
     
     public String login()
     {
-        boolean cancela =false;
           FacesContext context = FacesContext.getCurrentInstance();
-        if (user.getEmail()==null) {
-            
-            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "Nombre esta en blanco"));
-            cancela=true;
-        } 
-        if (user.getSenha()==null) {
-            
-            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "Contraseña esta en blanco"));
-            cancela=true;
-        } 
-        if (cancela) {return null;}
+ 
         
         String hash = Seguridad.criptografar(user.getEmail(), user.getSenha());
         Pessoa p = dao.getPessoaByEmail(user.getEmail());
         
         if(!p.getSenhaBanco().equals(hash)){
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "Nombre o contraseña invalidos"));
             Mensagens.avisoErro("Usuário ou senha incorreto(s)");
             return null; //login falhou 
         } else
         {      
             System.out.print("AAAAAAAAAAAAAAAEEEEEEEEEEEEEOOOOOOOOOOOOOWWWWWWWWWWWW");
+            CompromisoBean.setUsuario(p);
             return "agenda?faces-redirect=true";
         }
+    }
+    
+    public void camposObrigatorio(boolean bool){
+        camposNecessarios=bool;    
     }
     
 }

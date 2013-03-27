@@ -7,29 +7,72 @@
     <ui:define name="titulo"> Agenda  </ui:define>
     <ui:define name="corpo" >
         <center>
-            <h:form >
-                <p:panel header="Agenda de .... ">
-                    <p:dataTable id="tabela" var="compromisso" value="">
-                        <p:column filterBy=""> 
+            <h:form id="form">
+                <p:panel header="Agenda de #{compromisoBean.user.nome} ">
+                    <p:dataTable id="tabela" var="comp" resizableColumns="false" 
+                                 value="#{compromisoBean.agenda}"
+                                 paginator="true" rowsPerPageTemplate="10,15,20"
+                                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} 
+                                 {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
+                                 emptyMessage="No hay compromisos apuntados"  >
+                        <!-- <p:ajax event="colResize" update=":form"  /> -->
+
+                        <f:facet name="header">  
+                            Compromisos almacenados 
+                        </f:facet>  
+
+                        <p:column style="text-align: center" filterBy=""> 
                             <f:facet name="header">
                                 <h:outputText value="Título"/>
                             </f:facet>
-                            <h:outputText value="#{compromisso.titulo}" />
+                            <h:outputText value="#{comp.titulo}" />
                         </p:column>
-                        <p:column filterBy="">
+
+                        <p:column style="text-align: center;width:10%" filterBy="">
                             <f:facet name="header">
                                 <h:outputText value="Data"/>
                             </f:facet>
-                            <h:outputText value="#{compromisso.dia}" />
+                            <h:outputText value="#{comp.dia}" />
                         </p:column>
-                        <p:column filterBy="">
+
+                        <p:column style="text-align: center;width:10%" filterBy="">
                             <f:facet name="header">
                                 <h:outputText value="Hora"/>
                             </f:facet>
-                            <h:outputText value="#{compromisso.hora}" />
+                            <h:outputText value="#{comp.hora}" />
                         </p:column>
-                        
+
+                        <p:column style="text-align: center;width:6%" >
+                            <f:facet name="header">
+                                <h:outputText value="Más..."/>
+                            </f:facet>
+                            <p:commandButton icon="ui-icon-plus" title="Más Informaciones" id="selectButton" 
+                                             update=":form:display" oncomplete="compDialog.show()" >  
+                                <f:setPropertyActionListener value="#{comp}" target="#{compromisoBean.compromisso}" />  
+                            </p:commandButton> 
+                    
+                        </p:column>
                     </p:dataTable>
+
+
+                    <p:dialog header="Detalles del Compromiso" widgetVar="compDialog" id="carDlg" resizable="false">  
+
+                        <h:panelGrid id="display" columns="2" cellpadding="4" style="margin:0 auto;">  
+                            <h:outputText value="Data:" />  
+                            <h:outputText value="#{compromisoBean.compromisso.dia}" style="font-weight:bold"/>  
+
+                            <h:outputText value="Hora" />  
+                            <h:outputText value="#{compromisoBean.compromisso.hora}" style="font-weight:bold"/>  
+   
+                            <h:outputText value="Título:" />  
+                            <h:outputText value="#{compromisoBean.compromisso.titulo}" style="font-weight:bold"/>  
+
+                            <h:outputText value="Descricion:" />  
+                            <h:outputText value="#{compromisoBean.compromisso.descricao}" style="font-weight:bold"/>  
+
+                        </h:panelGrid>  
+
+                    </p:dialog>
                 </p:panel>
             </h:form>
         </center>
