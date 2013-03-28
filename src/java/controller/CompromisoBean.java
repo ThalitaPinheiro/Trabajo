@@ -95,4 +95,10 @@ public class CompromisoBean {
         }    
     }
     
+    public String nuevoCompromiso()
+    {
+        compromisso=new Compromisso();
+        return "/faces/nuevoCompromiso?faces-redirect=true";
+    }
+    
 }

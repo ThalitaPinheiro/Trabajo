@@ -37,8 +37,8 @@ public class RedirecionamentosBean {
         return "index?faces-redirect=true";
     }
     
-    public String nuevoCompromiso()
-    {
-        return "/faces/nuevoCompromiso?faces-redirect=true";
-    }
+//    public String nuevoCompromiso()
+//    {
+//        return "/faces/nuevoCompromiso?faces-redirect=true";
+//    }
 }

@@ -12,12 +12,14 @@
                     <h:panelGrid  columns="2" >
 
                         <h:outputText value="Título:" />
-                        <p:inputText  value="#{compromisoBean.compromisso.titulo}" size="100"/>
+                        <p:inputText  value="#{compromisoBean.compromisso.titulo}" size="100"
+                                      required="true" requiredMessage="Tiene que inserir un titulo"/>
 
                         <h:outputText value="Descrición:" />
                         <p:inputTextarea value="#{compromisoBean.compromisso.descricao}"
                                          rows="5" cols="71"  maxlength="200"  counter="counter"    
-                                         counterTemplate="{0} characters restantes" autoResize="false" />    
+                                         counterTemplate="{0} characters restantes" autoResize="false" 
+                                         required="true" requiredMessage="Tiene que inserir la descricion del compromiso"/>    
                         <h:outputText value=" "/>
                         <h:outputText id="counter" style="font-size: 9px ;left: 50%;width: 100px;
                                       margin-left: 190px;  text-align:center"/> 
