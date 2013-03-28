@@ -7,12 +7,14 @@ package controller;
 import dao.impl.CompromisoDAOImpl;
 import java.util.ArrayList;
 import java.util.List;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import model.Compromisso;
 import model.Pessoa;
+import org.primefaces.event.RateEvent;
 import utils.Mensagens;
 
 /**
@@ -83,14 +85,14 @@ public class CompromisoBean {
        
         if (!compromisso.getTitulo().isEmpty())
         {   
-            Mensagens.aviso("Usuário incluído com sucesso!");
-            FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);//put("pessoaBean", this);
+           // Mensagens.aviso("Usuário incluído com sucesso!");
+           // FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);//put("pessoaBean", this);
             agenda=daoCompromiso.listAllCompromissosUser(usuario);
             return "agenda?faces-redirect=true";
         }
         else
         {
-            Mensagens.avisoErro("Falha ao cadastrar usuário."); 
+           // Mensagens.avisoErro("Falha ao cadastrar usuário."); 
             return null;
         }    
     }
@@ -100,5 +102,13 @@ public class CompromisoBean {
         compromisso=new Compromisso();
         return "/faces/nuevoCompromiso?faces-redirect=true";
     }
+    
+     public void onrate(RateEvent rateEvent) {  
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, 
+                "Importância", "La importancia del compromiso es:" + 
+                ((Integer) rateEvent.getRating()).intValue());  
+  
+        FacesContext.getCurrentInstance().addMessage(null, message);  
+    } 
     
 }

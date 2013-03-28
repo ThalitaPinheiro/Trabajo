@@ -8,6 +8,7 @@
     <ui:define name="corpo" >
         <center>
             <h:form >
+                <p:growl id="mensagens" showDetail="true" />
                 <p:panel header="Nuevo Compromiso de #{compromisoBean.user.nome}"> <!-- colocar aqui o nome do fulano -->
                     <h:panelGrid  columns="2" >
 
@@ -19,7 +20,8 @@
                         <p:inputTextarea value="#{compromisoBean.compromisso.descricao}"
                                          rows="5" cols="71"  maxlength="200"  counter="counter"    
                                          counterTemplate="{0} characters restantes" autoResize="false" 
-                                         required="true" requiredMessage="Tiene que inserir la descricion del compromiso"/>    
+                                         required="true"
+                                        requiredMessage="La descricion del compromiso no puede estar vacia"/>    
                         <h:outputText value=" "/>
                         <h:outputText id="counter" style="font-size: 9px ;left: 50%;width: 100px;
                                       margin-left: 190px;  text-align:center"/> 
@@ -29,8 +31,11 @@
                     <h:panelGrid  columns="4" cellpadding="5">
                         <center>
                             <h:outputText value="Importancia:" />
-                            <p:rating id="selNumeroSemanas" required="true"
-                                      value="#{compromisoBean.compromisso.status}"/>
+                            <p:rating id="selNumeroSemanas" required="true" cancel="false"
+                                      value="#{compromisoBean.compromisso.status}">
+                                <p:ajax event="rate" listener="#{compromisoBean.onrate}" update="mensagens" /> 
+                            </p:rating>
+                                
                         </center>
                     </h:panelGrid>
                         <h:panelGrid  columns="4" cellpadding="5">
@@ -39,16 +44,16 @@
                                     required="true"  locale="pt_BR" pattern="dd/MM/yyyy"
                                     requiredMessage="Hay de inserir tu data de nascimiento."/>
                         <h:outputLabel value="Hora:"/>
-                        <p:inputMask mask="99h:99min" value="#{compromisoBean.compromisso.hora}"/>
-
-
+                        <p:calendar id="horaInicial" timeOnly="true" locale="br" pattern="HH:mm"
+                                    value="#{compromisoBean.compromisso.hora}"  
+                                required="true" requiredMessage="Preencha o campo Hora Inicial!"/>  
                     </h:panelGrid>
                     <center>
                         <p:commandButton value="Salvar" action="#{compromisoBean.salvar()}" 
                                          icon="ui-icon-disk" ajax="false" update="mensagens"/>
                     </center> 
                 </p:panel>
-                <p:growl id="mensagens" showDetail="true" />
+                
             </h:form>
         </center>
     </ui:define>
