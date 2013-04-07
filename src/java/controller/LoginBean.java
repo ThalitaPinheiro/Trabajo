@@ -49,18 +49,19 @@ public class LoginBean {
 
     public String login() {
         FacesContext context = FacesContext.getCurrentInstance();
-     
+
         Pessoa p = dao.getPessoaByEmail(user.getEmail());
         if (p != null) {
             String hash = Seguridad.criptografar(user.getEmail(), user.getSenha());
-            if (!p.getSenhaBanco().equals(hash)) {
-                context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "Contraseña invalida"));
-                Mensagens.avisoErro("Contrasenha incorrecta)");
-                return null; //login falhou 
-            }else {
+            if (p.getSenhaBanco().equals(hash)) {
                 System.out.print("AAAAAAAAAAAAAAAEEEEEEEEEEEEEOOOOOOOOOOOOOWWWWWWWWWWWW");
                 CompromisoBean.setUsuario(p);
                 return "agenda?faces-redirect=true";
+
+            } else {
+                context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "Contraseña invalida"));
+                Mensagens.avisoErro("Contrasenha incorrecta)");
+                return null; //login falhou 
             }
         } else {
             context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "Nombre invalido"));

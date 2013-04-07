@@ -30,14 +30,24 @@ public class CompromisoBean {
     private CompromisoDAOImpl daoCompromiso = new CompromisoDAOImpl();
     private Compromisso compromisso = new Compromisso();
     private List<Compromisso> agenda = new ArrayList<Compromisso>();
+    private boolean camposObg = true;
 
     public CompromisoBean() {
-       
+
         user = usuario;
-        if(user==null){
-         return ;
-        }          
+        if (user == null) {
+            return;
+        }
+        camposObg = true;
         agenda = daoCompromiso.listAllCompromissosUser(usuario);
+    }
+
+    public boolean isCamposObrigatorios() {
+        return camposObg;
+    }
+
+    public void setCamposObg(boolean camposObg) {
+        this.camposObg = camposObg;
     }
 
     public Pessoa getUser() {
@@ -79,7 +89,13 @@ public class CompromisoBean {
     public static void setUsuario(Pessoa usuario) {
         CompromisoBean.usuario = usuario;
     }
-
+    
+    public String logout()
+    {
+        usuario=null;
+        return "index?faces-redirect=true";
+    }
+    
     public String salvar() {
         //this.removeMascara();
         compromisso.setUsuario(usuario);
@@ -106,9 +122,11 @@ public class CompromisoBean {
 
     public String nuevoCompromiso() {
         if (usuario == null) {
+            Mensagens.avisoErro("No tiene permision para hacer esto."); 
             return "/faces/acessDenied?faces-redirect=true";
         } else {
             compromisso = new Compromisso();
+            camposObg = true;
             return "/faces/nuevoCompromiso?faces-redirect=true";
         }
     }
@@ -119,5 +137,17 @@ public class CompromisoBean {
                 + ((Integer) rateEvent.getRating()).intValue());
 
         FacesContext.getCurrentInstance().addMessage(null, message);
+    }
+
+    public String voltar() {
+        if (usuario == null) {
+            return "/faces/acessDenied?faces-redirect=true";
+        } else {
+            return "agenda?faces-redirect=true";
+        }
+    }
+
+    public void camposObrigatorio(boolean x) {
+        camposObg = x;
     }
 }

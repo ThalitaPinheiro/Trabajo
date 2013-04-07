@@ -49,9 +49,13 @@
                                     value="#{compromisoBean.compromisso.hora}" 
                                     required="true" requiredMessage="Preencha o campo Hora Inicial!"/>  
                     </h:panelGrid>
-                    <center>
+                    <center >
                         <p:commandButton value="Salvar" action="#{compromisoBean.salvar()}" 
                                          icon="ui-icon-disk" ajax="false" update="mensagens"/>
+                        
+                        <p:commandButton value="Voltar" action="#{compromisoBean.voltar()}"
+                                         process="@this" icon="ui-icon-arrowreturnthick-1-e"
+                                         onclick="#{compromisoBean.camposObrigatorio(false)}" />
                     </center> 
                 </p:panel>
                 

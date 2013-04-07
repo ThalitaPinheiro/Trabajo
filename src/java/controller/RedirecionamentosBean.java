@@ -31,11 +31,11 @@ public class RedirecionamentosBean {
         return "cadastro.xhtml?faces-redirect=true";
     }
     
-    public String logout()
-    {
-        CompromisoBean.usuario=null;
-        return "index?faces-redirect=true";
-    }
+//    public String logout()
+//    {
+//        CompromisoBean.usuario=null;
+//        return "index?faces-redirect=true";
+//    }
     
 //    public String nuevoCompromiso()
 //    {
