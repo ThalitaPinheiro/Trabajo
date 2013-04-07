@@ -9,7 +9,7 @@
         <center>
             <h:form >
                 <!--<p:growl id="mensagens" showDetail="true" />-->
-                 <p:focus for="nome"/> 
+                <p:focus for="nome"/> 
                 <p:panel header="Datos usuario">
                     <h:panelGrid columns="2">
 
@@ -18,17 +18,31 @@
                                      required="true" requiredMessage="Hay de digitar tu nombre."/>
 
                         <h:outputText value="Email (será tu nombre de usuario):" />
-                        <p:inputText  value="#{pessoaBean.pessoa.email}" 
-                                      required="true" requiredMessage="Hay de digitar tu correo."/>
+                        <p:inputText  id="email" value="#{pessoaBean.pessoa.email}"
+                                      required="true" requiredMessage="Hay de digitar un correo valido."
+                                      validatorMessage="Hay de digitar un correo valido." immediate="true"> 
+                            <f:validateRegex pattern="[a-zA-Z0-9\-\_.]+@[a-zA-Z0-9\-\_.]+.+[a-zA-Z0-9\-\_.]" />
+                            <p:ajax event="blur" update="mensagens,email" />
+                        </p:inputText>
 
                         <h:outputText value="Data Nascimiento:" />
-                        <p:calendar value="#{pessoaBean.pessoa.dataNascimento}" 
+                        <p:calendar value="#{pessoaBean.pessoa.dataNascimento}" navigator="true"                                              
+                                    locale="pt_BR" pattern="dd/MM/yyyy" maxdate="Calendar.getInstance();" mindate="1/1/1900"
                                     required="true" requiredMessage="Hay de inserir tu data de nascimiento."/>
 
-                        <h:outputText value="Contraseña:" />
-                        <p:password value="#{pessoaBean.pessoa.senha}" promptLabel="Digite uma senha segura" 
+
+                        <h:outputLabel value="Contraseña:" />
+                        <p:password id="pwd1" value="#{pessoaBean.pessoa.senha}" label="Password 1"
+                                    promptLabel="Digite uma senha segura" 
                                     goodLabel="Boa" weakLabel="Ruim" strongLabel="Excelente" feedback="true" 
-                                    required="true" requiredMessage="Hay de digitar una contaseña."/>
+                                    required="true" requiredMessage="Hay de digitar una contaseña."
+                                    match="pwd2" validatorMessage="Las contraseñas devem ser equales."/>
+                        <h:outputText id="p1" value="Confirme la contraseña:" />
+                        <p:password id="pwd2" value="#{pessoaBean.pessoa.senha}" label="Password 2" 
+                                    required="true" requiredMessage="Hay que confirmar la contraseña" >
+
+                        </p:password>
+
 
                     </h:panelGrid>
                     <center>
@@ -36,7 +50,7 @@
                                          icon="ui-icon-disk" ajax="false" update="mensagens"/>
                     </center>                
                 </p:panel>
-                <p:growl id="mensagens" showDetail="true" />
+                <p:growl id="mensagens" showDetail="true" autoUpdate="true"/>
             </h:form>
         </center>
     </ui:define>

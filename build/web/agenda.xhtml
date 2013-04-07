@@ -8,6 +8,7 @@
     <ui:define name="corpo" >
         <center>
             <h:form id="form">
+                <p:growl id="messages" />
                 <p:panel header="Agenda de #{compromisoBean.user.nome} ">
                     <p:dataTable id="tabela" var="comp" resizableColumns="false" 
                                  value="#{compromisoBean.agenda}"
@@ -50,7 +51,18 @@
                                              update=":form:display" oncomplete="compDialog.show()" >  
                                 <f:setPropertyActionListener value="#{comp}" target="#{compromisoBean.compromisso}" />  
                             </p:commandButton> 
-                    
+
+                        </p:column>
+
+                        <p:column style="text-align: center;width:6%" >
+                            <f:facet name="header">
+                                <h:outputText value="Deletar"/>
+                            </f:facet>
+                            <p:commandButton icon="ui-icon-trash" title="Más Informaciones" id="deletComp" 
+                                              onclick="confirmation.show()" >  
+                                <f:setPropertyActionListener value="#{comp}" target="#{compromisoBean.compromisso}" />  
+                            </p:commandButton> 
+
                         </p:column>
                     </p:dataTable>
 
@@ -63,7 +75,7 @@
 
                             <h:outputText value="Hora" />  
                             <h:outputText value="#{compromisoBean.compromisso.hora}" style="font-weight:bold"/>  
-   
+
                             <h:outputText value="Título:" />  
                             <h:outputText value="#{compromisoBean.compromisso.titulo}" style="font-weight:bold"/>  
 
@@ -73,6 +85,16 @@
                         </h:panelGrid>  
 
                     </p:dialog>
+
+                    <p:confirmDialog id="confirmDialog" message="Estás cierto de que quiere suprimir lo compromiso?"  
+                                     header="Deletar compromiso" severity="alert" widgetVar="confirmation">  
+
+                        <p:commandButton id="confirm" value="Si" update="messages" oncomplete="confirmation.hide()"  
+                                         onclick="#{compromisoBean.deletar()}" />  
+                        <p:commandButton id="decline" value="No" onclick="confirmation.hide()" type="button" />   
+
+                    </p:confirmDialog>
+                    
                 </p:panel>
             </h:form>
         </center>

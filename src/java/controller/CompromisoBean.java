@@ -22,17 +22,21 @@ import utils.Mensagens;
  * @author Thalita
  */
 @ManagedBean(name = "compromisoBean")
-@SessionScoped
+@ViewScoped
 public class CompromisoBean {
 
     static Pessoa usuario;
     private Pessoa user = new Pessoa();
     private CompromisoDAOImpl daoCompromiso = new CompromisoDAOImpl();
-    private Compromisso compromisso= new Compromisso();
+    private Compromisso compromisso = new Compromisso();
     private List<Compromisso> agenda = new ArrayList<Compromisso>();
 
     public CompromisoBean() {
-        user=usuario;
+       
+        user = usuario;
+        if(user==null){
+         return ;
+        }          
         agenda = daoCompromiso.listAllCompromissosUser(usuario);
     }
 
@@ -75,40 +79,45 @@ public class CompromisoBean {
     public static void setUsuario(Pessoa usuario) {
         CompromisoBean.usuario = usuario;
     }
-    
-    
-    public String salvar() 
-    {
+
+    public String salvar() {
         //this.removeMascara();
         compromisso.setUsuario(usuario);
         compromisso = daoCompromiso.save(compromisso);
-       
-        if (!compromisso.getTitulo().isEmpty())
-        {   
-           // Mensagens.aviso("Usuário incluído com sucesso!");
-           // FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);//put("pessoaBean", this);
-            agenda=daoCompromiso.listAllCompromissosUser(usuario);
+
+        if (!compromisso.getTitulo().isEmpty()) {
+            // Mensagens.aviso("Usuário incluído com sucesso!");
+            // FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);//put("pessoaBean", this);
+            agenda = daoCompromiso.listAllCompromissosUser(usuario);
             return "agenda?faces-redirect=true";
-        }
-        else
-        {
-           // Mensagens.avisoErro("Falha ao cadastrar usuário."); 
+        } else {
+            // Mensagens.avisoErro("Falha ao cadastrar usuário."); 
             return null;
-        }    
+        }
     }
-    
-    public String nuevoCompromiso()
-    {
-        compromisso=new Compromisso();
-        return "/faces/nuevoCompromiso?faces-redirect=true";
+
+    public String deletar() {
+        daoCompromiso.delete(compromisso);
+        daoCompromiso = new CompromisoDAOImpl();
+        agenda = daoCompromiso.listAllCompromissosUser(usuario);
+        return "agenda?faces-redirect=true";
+
     }
-    
-     public void onrate(RateEvent rateEvent) {  
-        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, 
-                "Importância", "La importancia del compromiso es:" + 
-                ((Integer) rateEvent.getRating()).intValue());  
-  
-        FacesContext.getCurrentInstance().addMessage(null, message);  
-    } 
-    
+
+    public String nuevoCompromiso() {
+        if (usuario == null) {
+            return "/faces/acessDenied?faces-redirect=true";
+        } else {
+            compromisso = new Compromisso();
+            return "/faces/nuevoCompromiso?faces-redirect=true";
+        }
+    }
+
+    public void onrate(RateEvent rateEvent) {
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,
+                "Importância", "La importancia del compromiso es:"
+                + ((Integer) rateEvent.getRating()).intValue());
+
+        FacesContext.getCurrentInstance().addMessage(null, message);
+    }
 }

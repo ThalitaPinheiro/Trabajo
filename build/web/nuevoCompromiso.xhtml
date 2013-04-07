@@ -42,11 +42,12 @@
                         <h:outputText value="Dia:" />
                         <p:calendar value="#{compromisoBean.compromisso.dia}" navigator="true"                                              
                                     required="true"  locale="pt_BR" pattern="dd/MM/yyyy"
-                                    requiredMessage="Hay de inserir tu data de nascimiento."/>
+                                    mindate="Calendar.getInstance(); "
+                                    requiredMessage="Hay que inserir el dia del compromiso."/>
                         <h:outputLabel value="Hora:"/>
-                        <p:calendar id="horaInicial" timeOnly="true" locale="br" pattern="HH:mm"
-                                    value="#{compromisoBean.compromisso.hora}"  
-                                required="true" requiredMessage="Preencha o campo Hora Inicial!"/>  
+                        <p:calendar id="horaInicial" timeOnly="true" locale="pt" pattern="HH:mm"
+                                    value="#{compromisoBean.compromisso.hora}" 
+                                    required="true" requiredMessage="Preencha o campo Hora Inicial!"/>  
                     </h:panelGrid>
                     <center>
                         <p:commandButton value="Salvar" action="#{compromisoBean.salvar()}" 

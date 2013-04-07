@@ -68,10 +68,6 @@ public class Pessoa implements Serializable {
     }
 
     public String getSenhaBanco() {
-        if(senhaBanco==null)
-        {
-            return " ";
-        }
         return senhaBanco;
     }
 

@@ -1,4 +1,3 @@
-
 package controller;
 
 import dao.impl.PessoaDAOImpl;
@@ -11,13 +10,13 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import seguridad.Seguridad;
 
-
-@ManagedBean (name="loginBean")
+@ManagedBean(name = "loginBean")
 @ViewScoped
 public class LoginBean {
+
     private Pessoa user;
     private PessoaDAOImpl dao;
-    private boolean camposNecessarios=true;
+    private boolean camposNecessarios = true;
 
     public LoginBean() {
         user = new Pessoa();
@@ -48,30 +47,29 @@ public class LoginBean {
         this.camposNecessarios = camposNecessarios;
     }
 
-      
-    
-    public String login()
-    {
-          FacesContext context = FacesContext.getCurrentInstance();
- 
-        
-        String hash = Seguridad.criptografar(user.getEmail(), user.getSenha());
+    public String login() {
+        FacesContext context = FacesContext.getCurrentInstance();
+     
         Pessoa p = dao.getPessoaByEmail(user.getEmail());
-        
-        if(!p.getSenhaBanco().equals(hash)){
-            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "Nombre o contraseña invalidos"));
-            Mensagens.avisoErro("Usuário ou senha incorreto(s)");
+        if (p != null) {
+            String hash = Seguridad.criptografar(user.getEmail(), user.getSenha());
+            if (!p.getSenhaBanco().equals(hash)) {
+                context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "Contraseña invalida"));
+                Mensagens.avisoErro("Contrasenha incorrecta)");
+                return null; //login falhou 
+            }else {
+                System.out.print("AAAAAAAAAAAAAAAEEEEEEEEEEEEEOOOOOOOOOOOOOWWWWWWWWWWWW");
+                CompromisoBean.setUsuario(p);
+                return "agenda?faces-redirect=true";
+            }
+        } else {
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "Nombre invalido"));
+            Mensagens.avisoErro("Nombre de suário incorrecto");
             return null; //login falhou 
-        } else
-        {      
-            System.out.print("AAAAAAAAAAAAAAAEEEEEEEEEEEEEOOOOOOOOOOOOOWWWWWWWWWWWW");
-            CompromisoBean.setUsuario(p);
-            return "agenda?faces-redirect=true";
         }
     }
-    
-    public void camposObrigatorio(boolean bool){
-        camposNecessarios=bool;    
+
+    public void camposObrigatorio(boolean bool) {
+        camposNecessarios = bool;
     }
-    
 }
