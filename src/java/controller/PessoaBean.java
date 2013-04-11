@@ -21,7 +21,7 @@ import seguridad.Seguridad;
 import utils.Mensagens;
 
 @ManagedBean
-@ViewScoped
+@SessionScoped
 public class PessoaBean {
 
     Pessoa pessoa;

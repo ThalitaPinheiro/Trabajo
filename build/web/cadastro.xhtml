@@ -7,7 +7,7 @@
     <ui:define name="titulo"> Registro de usuario </ui:define>
     <ui:define name="corpo" >
         <center>
-            <h:form >
+            <h:form id="formPrincipal">
                 <!--<p:growl id="mensagens" showDetail="true" />-->
                 <p:focus for="nome"/> 
                 <p:panel header="Datos usuario">
@@ -26,7 +26,7 @@
                         </p:inputText>
 
                         <h:outputText value="Data Nascimiento:" />
-                        <p:calendar value="#{pessoaBean.pessoa.dataNascimento}" navigator="true"                                              
+                        <p:calendar value="#{pessoaBean.pessoa.dataNascimento}" navigator="true"                                
                                     locale="pt_BR" pattern="dd/MM/yyyy" maxdate="Calendar.getInstance();" mindate="1/1/1900"
                                     required="true" requiredMessage="Hay de inserir tu data de nascimiento."/>
 
@@ -39,8 +39,7 @@
                                     match="pwd2" validatorMessage="Las contraseñas devem ser equales."/>
                         <h:outputText id="p1" value="Confirme la contraseña:" />
                         <p:password id="pwd2" value="#{pessoaBean.pessoa.senha}" label="Password 2" 
-                                    required="true" requiredMessage="Hay que confirmar la contraseña" >
-
+                                    required="true" requiredMessage="Hay que confirmar la contraseña">
                         </p:password>
 
 
