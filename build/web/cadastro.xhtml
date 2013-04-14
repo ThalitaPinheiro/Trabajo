@@ -47,7 +47,11 @@
                     <center>
                         <p:commandButton value="Salvar" action="#{pessoaBean.salvar()}" 
                                          icon="ui-icon-disk" ajax="false" update="mensagens"/>
-                    </center>                
+                        
+                        <p:commandButton value="Voltar" action="#{redirecionamentosBean.voltarPaginaLogin()}"
+                                          process="@this" icon="ui-icon-arrowreturnthick-1-e"/>
+                    </center>    
+                     
                 </p:panel>
                 <p:growl id="mensagens" showDetail="true" autoUpdate="true"/>
             </h:form>

@@ -20,25 +20,37 @@ import javax.faces.bean.ViewScoped;
  */
 
 @ManagedBean (name ="redirecionamentosBean")
-@ViewScoped
+@SessionScoped
 public class RedirecionamentosBean {
+    private static boolean paginaCadastro;
     
     public RedirecionamentosBean() {
     }
-    
+
+    public static boolean isPaginaCadastro() {
+        System.out.print(paginaCadastro);
+        return paginaCadastro;
+    }
+
+    public static void setPaginaCadastro(boolean x) {
+        RedirecionamentosBean.paginaCadastro = x;
+    }
+      
     public String cadastroPessoa()
     {
+        paginaCadastro=true;
+        isPaginaCadastro();
         return "cadastro.xhtml?faces-redirect=true";
     }
     
-//    public String logout()
-//    {
-//        CompromisoBean.usuario=null;
-//        return "index?faces-redirect=true";
-//    }
+    public static String pageError()
+    {
+        return "accessDenied?faces-redirect=true";
+    }
     
-//    public String nuevoCompromiso()
-//    {
-//        return "/faces/nuevoCompromiso?faces-redirect=true";
-//    }
+    public String voltarPaginaLogin()
+    {
+        paginaCadastro=false;
+        return "index?faces-redirect=true";
+    }
 }

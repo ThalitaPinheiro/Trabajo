@@ -61,7 +61,7 @@
                                 <p:commandLink value="Todavia no tengo cadastro" action="#{redirecionamentosBean.cadastroPessoa()}"
                                                style="font-size: 11px ;left: 50%;width: 100px;
                                                margin-left: -50px;  text-align:center" process="@this"
-                                               onclick="#{loginBean.camposObrigatorio(false)}" update="formPrincipal"/>
+                                               onclick="#{redirecionamentosBean.setPaginaCadastro(true)}" update="formPrincipal"/>
                             </h:panelGrid>
                             <h:panelGrid columns="1">
                                 <br/>

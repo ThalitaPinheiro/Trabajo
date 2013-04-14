@@ -22,17 +22,18 @@
 
             <p:layoutUnit position="north" size="245">
                 <div class="cabecalho">
-                    <p:panel header="Su agenda de compromisos online!"  >
+                    <p:panel header="Su agenda de compromisos online! é"  >
                         <center class="body">
                             <h:graphicImage url="CSS/imagenes/topo.jpg" /> 
 
                         </center>
                     </p:panel>
                 </div>
-                <h:form>
+                <h:form rendered="#{!redirecionamentosBean.isPaginaCadastro()}">
                      <div style="float:left; " >
                         <p:commandButton value="Nuevo Compromiso" image="ui-icon-calendar" 
                                          action="#{compromisoBean.nuevoCompromiso()}" ajax="false"
+                                    
                                          style=" font-size:12px;
                                          font-weight:bold;
                                          width:200px;"/>
@@ -40,6 +41,7 @@
                     <div style="float:right">
                         <p:commandButton value="Sair" image="ui-icon-power" 
                                          action="#{compromisoBean.logout()}" ajax="false"
+                                
                                          style=" font-size:12px;
                                          font-weight:bold;
                                          width:80px;"/>

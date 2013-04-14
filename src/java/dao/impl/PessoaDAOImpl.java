@@ -30,4 +30,6 @@ public class PessoaDAOImpl extends GenericDAOImpl<Pessoa, Integer> implements Pe
         c.add(EMAIL);
         return (Pessoa) c.uniqueResult();           
     }
+    
+   
 }

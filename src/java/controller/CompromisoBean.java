@@ -24,7 +24,7 @@ import utils.Mensagens;
 @ManagedBean(name = "compromisoBean")
 @ViewScoped
 public class CompromisoBean {
-
+    
     static Pessoa usuario;
     private Pessoa user = new Pessoa();
     private CompromisoDAOImpl daoCompromiso = new CompromisoDAOImpl();
@@ -33,9 +33,10 @@ public class CompromisoBean {
     private boolean camposObg = true;
 
     public CompromisoBean() {
-
+        
         user = usuario;
-        if (user == null) {
+        if (usuario == null) {
+            RedirecionamentosBean.pageError();
             return;
         }
         camposObg = true;
@@ -99,23 +100,25 @@ public class CompromisoBean {
     public String salvar() {
         //this.removeMascara();
         compromisso.setUsuario(usuario);
+        try{
         compromisso = daoCompromiso.save(compromisso);
-
-        if (!compromisso.getTitulo().isEmpty()) {
-            // Mensagens.aviso("Usuário incluído com sucesso!");
-            // FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);//put("pessoaBean", this);
+        }catch(Exception x){
+             FacesContext context = FacesContext.getCurrentInstance();
+             context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "Error"));
+             Mensagens.avisoErro("Ocorrió un error y no fué possible salvar");
+        }
+            agenda.clear();
             agenda = daoCompromiso.listAllCompromissosUser(usuario);
             return "agenda?faces-redirect=true";
-        } else {
-            // Mensagens.avisoErro("Falha ao cadastrar usuário."); 
-            return null;
-        }
+
     }
 
-    public String deletar() {
-        daoCompromiso.delete(compromisso);
+    public String deletar() {       
+        daoCompromiso.delete(compromisso);        
         daoCompromiso = new CompromisoDAOImpl();
+        agenda.clear();
         agenda = daoCompromiso.listAllCompromissosUser(usuario);
+        
         return "agenda?faces-redirect=true";
 
     }

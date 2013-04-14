@@ -56,6 +56,8 @@ public class LoginBean {
             if (p.getSenhaBanco().equals(hash)) {
                 System.out.print("AAAAAAAAAAAAAAAEEEEEEEEEEEEEOOOOOOOOOOOOOWWWWWWWWWWWW");
                 CompromisoBean.setUsuario(p);
+                RedirecionamentosBean.setPaginaCadastro(false);
+                System.out.print(RedirecionamentosBean.isPaginaCadastro());
                 return "agenda?faces-redirect=true";
 
             } else {

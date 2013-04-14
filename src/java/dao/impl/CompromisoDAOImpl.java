@@ -27,9 +27,9 @@ public class CompromisoDAOImpl extends GenericDAOImpl<Compromisso, Integer> impl
 
     public CompromisoDAOImpl() {
     }
-
+   
     public List<Compromisso> listAllCompromissosUser(Pessoa user) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        return session.createCriteria(Compromisso.class).add(Restrictions.eq("usuario", user)).list();
+        ss = HibernateUtil.getSessionFactory().openSession();
+        return ss.createCriteria(Compromisso.class).add(Restrictions.eq("usuario", user)).list();
     }
 }

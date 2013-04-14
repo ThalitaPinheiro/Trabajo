@@ -14,7 +14,8 @@
                                  value="#{compromisoBean.agenda}"
                                  paginator="true" rowsPerPageTemplate="10,15,20"
                                  paginatorTemplate="{CurrentPageReport}  {FirstPageLink} 
-                                 {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
+                                 {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} 
+                                 {RowsPerPageDropdown}"  
                                  emptyMessage="No hay compromisos apuntados"  >
                         <!-- <p:ajax event="colResize" update=":form"  /> -->
 
@@ -33,7 +34,7 @@
                             <f:facet name="header">
                                 <h:outputText value="Data"/>
                             </f:facet>
-                            <h:outputText value="#{comp.dia}" />
+                            <h:outputText value="#{comp.dia}"  />
                         </p:column>
 
                         <p:column style="text-align: center;width:10%" filterBy="">
@@ -59,42 +60,45 @@
                                 <h:outputText value="Deletar"/>
                             </f:facet>
                             <p:commandButton icon="ui-icon-trash" title="Más Informaciones" id="deletComp" 
-                                              onclick="confirmation.show()" >  
+                                             onclick="confirmation.show()" >  
                                 <f:setPropertyActionListener value="#{comp}" target="#{compromisoBean.compromisso}" />  
                             </p:commandButton> 
 
                         </p:column>
                     </p:dataTable>
 
+                    <center>
+                        <p:dialog header="Detalles del Compromiso" widgetVar="compDialog" id="carDlg" resizable="false">  
 
-                    <p:dialog header="Detalles del Compromiso" widgetVar="compDialog" id="carDlg" resizable="false">  
+                            <h:panelGrid id="display" columns="2" cellpadding="4" style="margin:0 auto;">  
+                                <h:outputText value="Data:" />  
+                                <h:outputText value="#{compromisoBean.compromisso.dia}" style="font-weight:bold"/>  
 
-                        <h:panelGrid id="display" columns="2" cellpadding="4" style="margin:0 auto;">  
-                            <h:outputText value="Data:" />  
-                            <h:outputText value="#{compromisoBean.compromisso.dia}" style="font-weight:bold"/>  
+                                <h:outputText value="Hora" />  
+                                <h:outputText value="#{compromisoBean.compromisso.hora}" style="font-weight:bold"/>  
 
-                            <h:outputText value="Hora" />  
-                            <h:outputText value="#{compromisoBean.compromisso.hora}" style="font-weight:bold"/>  
+                                <h:outputText value="Título:" />  
+                                <h:outputText value="#{compromisoBean.compromisso.titulo}" style="font-weight:bold"/>  
 
-                            <h:outputText value="Título:" />  
-                            <h:outputText value="#{compromisoBean.compromisso.titulo}" style="font-weight:bold"/>  
+                                <h:outputText value="Descricion:" />  
+                                <h:outputText value="#{compromisoBean.compromisso.descricao}" style="font-weight:bold"/>  
 
-                            <h:outputText value="Descricion:" />  
-                            <h:outputText value="#{compromisoBean.compromisso.descricao}" style="font-weight:bold"/>  
+                            </h:panelGrid>  
 
-                        </h:panelGrid>  
+                        </p:dialog>
 
-                    </p:dialog>
 
-                    <p:confirmDialog id="confirmDialog" message="Estás cierto de que quiere suprimir lo compromiso?"  
-                                     header="Deletar compromiso" severity="alert" widgetVar="confirmation">  
+                        <p:dialog id="confirmDialog" header="Deletar compromiso"  widgetVar="confirmation">  
 
-                        <p:commandButton id="confirm" value="Si" update="messages" oncomplete="confirmation.hide()"  
-                                         onclick="#{compromisoBean.deletar()}" />  
-                        <p:commandButton id="decline" value="No" onclick="confirmation.hide()" type="button" />   
+                            <h:outputText value="Estás cierto de que quiere suprimir lo compromiso?"/>
+                            <h:panelGrid columns="2">
+                                <p:commandButton id="confirm" value="Si" update="messages" oncomplete="confirmation.hide()"  
+                                                 onclick="#{compromisoBean.deletar()}" />  
+                                <p:commandButton id="decline" value="No" onclick="confirmation.hide()" />  
+                            </h:panelGrid>             
 
-                    </p:confirmDialog>
-                    
+                        </p:dialog>
+                    </center>
                 </p:panel>
             </h:form>
         </center>

@@ -32,7 +32,8 @@
                         <center>
                             <h:outputText value="Importancia:" />
                             <p:rating id="selNumeroSemanas" required="true" cancel="false"
-                                      value="#{compromisoBean.compromisso.status}">
+                                      value="#{compromisoBean.compromisso.status}"
+                                      requiredMessage="Ponga la importancia del compromiso.">
                                 <p:ajax event="rate" listener="#{compromisoBean.onrate}" update="mensagens" /> 
                             </p:rating>
                                 
