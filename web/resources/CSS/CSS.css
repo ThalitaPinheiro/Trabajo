@@ -5,7 +5,8 @@
     Description:
         Purpose of the stylesheet follows.
 */
-
+@charset "utf-8";  
+/* CSS Document */  
 root { 
     display: table;
 }
@@ -15,8 +16,8 @@ cabecalho h1{
                 margin-bottom: 0;
                 text-align: center; 
 
-}
+            }
             
-.body {
-    background-color: #A9B2BB; font-size: 12px
+.teste {
+    background-color: #A9B2BB !important; font-size: 12px
 }
