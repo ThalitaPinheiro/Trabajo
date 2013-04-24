@@ -15,25 +15,28 @@
             }
             .body {background-color: #A9B2BB; font-size: 12px}
         </style>
-                <link rel="stylesheet" type="text/css" href="/WEB-INF/CSS.css" />
+        <link rel="stylesheet" type="text/css" href="/WEB-INF/CSS.css" />
     </h:head>
     <h:body>
         <p:layout fullPage="true" style="min-width:1035px;max-width:1035px;min-height:600px">
 
             <p:layoutUnit position="north" size="245">
-                <div class="cabecalho">
-                    <p:panel header="Su agenda de compromisos online! é"  >
-                        <center class="body">
-                            <h:graphicImage url="resources/imagenes/topo.jpg" /> 
+                <a href="agenda.xhtml">
+                   <div class="cabecalho">
+                        <p:panel header="Su agenda de compromisos online! é"  >
+                            <center class="body">
 
-                        </center>
-                    </p:panel>
-                </div>
+                                <h:graphicImage url="resources/imagenes/topo.jpg"/> 
+
+                            </center>
+                        </p:panel>
+                    </div>
+                </a>
                 <h:form rendered="#{!redirecionamentosBean.isPaginaCadastro()}">
-                     <div style="float:left; " >
+                    <div style="float:left; " >
                         <p:commandButton value="Nuevo Compromiso" image="ui-icon-calendar" 
                                          action="#{compromisoBean.nuevoCompromiso()}" ajax="false"
-                                    
+
                                          style=" font-size:12px;
                                          font-weight:bold;
                                          width:200px;"/>
@@ -41,7 +44,7 @@
                     <div style="float:right">
                         <p:commandButton value="Sair" image="ui-icon-power" 
                                          action="#{compromisoBean.logout()}" ajax="false"
-                                
+
                                          style=" font-size:12px;
                                          font-weight:bold;
                                          width:80px;"/>

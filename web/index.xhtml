@@ -20,14 +20,16 @@
         <p:layout fullPage="true" style="min-width:500px;max-width:1035px;min-height:600px">
 
             <p:layoutUnit position="north" size="215" >
-                <div class="cabecalho">
-                    <p:panel header="Su agenda de compromisos online!"  >
-                        <center class="body" >
-                            <h:graphicImage url="resources/imagenes/topo.jpg"  /> 
+                <a href="index.xhtml">
+                    <div class="cabecalho">
+                        <p:panel header="Su agenda de compromisos online!"  >
+                            <center class="body" >
+                                <h:graphicImage url="resources/imagenes/topo.jpg"  /> 
 
-                        </center>
-                    </p:panel>
-                </div>
+                            </center>
+                        </p:panel>
+                    </div>
+                </a>
                 <h:form rendered="false">
                     <div style="float:right">
                         <p:commandButton value="Sair" image="ui-icon-power" action="#{redirecionamentosBean.logout()}" ajax="false"
@@ -42,10 +44,10 @@
             <p:layoutUnit position="center" style="border-left-width: 250px; 
                           border-right-width:250px; border-bottom-width:100px; 
                           border-top-width: 5px;  border-color: rgb">
-              
-                    <h:form id="formPrincipal">
-                       <div align="center">
-                         
+
+                <h:form id="formPrincipal">
+                    <div align="center">
+
                         <p:panel header="Login" >
                             <p:focus for="email"/> 
                             <h:panelGrid columns="2" style="padding: 10px">
@@ -69,12 +71,12 @@
                                                  action="#{loginBean.login()}" update="formPrincipal"/>
                             </h:panelGrid>
                         </p:panel>
-                           
+
                         <p:messages id="mensagens" showDetail="true" />
                         <h6> Copyright © 2013 THALITA PINHEIRO™, All Rights Reserved.</h6>
-                        </div>
-                    </h:form>
-                
+                    </div>
+                </h:form>
+
             </p:layoutUnit> 
 
         </p:layout>  
