@@ -53,4 +53,12 @@ public class RedirecionamentosBean {
         paginaCadastro=false;
         return "index?faces-redirect=true";
     }
+    
+    public String cliqueiNoBanner(){
+        if(CompromisoBean.usuario==null){
+        return "index?faces-redirect=true";
+        }else{
+        return "agenda?faces-redirect=true";
+        }     
+    }
 }

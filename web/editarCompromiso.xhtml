@@ -1,0 +1,68 @@
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/WEB-INF/template.xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core">
+    <ui:define name="titulo"> Editar Compromiso </ui:define>
+    <ui:define name="corpo" >
+        <center>
+            <h:form >
+                <p:growl id="mensagens" showDetail="true" />
+                <p:panel header="Cambios do Compromiso de #{compromisoBean.user.nome}"> <!-- colocar aqui o nome do fulano -->
+                    <h:panelGrid  columns="2" >
+
+                        <h:outputText value="Título:" />
+                        <p:inputText  value="#{compromisoBean.comp.titulo}" size="100"
+                                      required="true" requiredMessage="Tiene que inserir un titulo"/>
+
+                        <h:outputText value="Descrición:" />
+                        <p:inputTextarea value="#{compromisoBean.comp.descricao}"
+                                         rows="5" cols="71"  maxlength="200"  counter="counter"    
+                                         counterTemplate="{0} characters restantes" autoResize="false" 
+                                         required="true"
+                                        requiredMessage="La descricion del compromiso no puede estar vacia"/>    
+                        <h:outputText value=" "/>
+                        <h:outputText id="counter" style="font-size: 9px ;left: 50%;width: 100px;
+                                      margin-left: 190px;  text-align:center"/> 
+                        
+                    </h:panelGrid>
+
+                    <h:panelGrid  columns="4" cellpadding="5">
+                        <center>
+                            <h:outputText value="Importancia:" />
+                            <p:rating id="selNumeroSemanas" required="true" cancel="false"
+                                      value="#{compromisoBean.comp.status}"
+                                      requiredMessage="Ponga la importancia del compromiso.">
+                                <p:ajax event="rate" listener="#{compromisoBean.onrate}" update="mensagens" /> 
+                            </p:rating>
+                                
+                        </center>
+                    </h:panelGrid>
+                        <h:panelGrid  columns="4" cellpadding="5">
+                        <h:outputText value="Dia:" />
+                        <p:calendar value="#{compromisoBean.comp.dia}" navigator="true"                                              
+                                    required="true"  locale="pt_BR" pattern="dd/MM/yyyy"
+                                    mindate="Calendar.getInstance(); "
+                                    requiredMessage="Hay que inserir el dia del compromiso."/>
+                        <h:outputLabel value="Hora:"/>
+                        <p:calendar id="horaInicial" timeOnly="true" locale="pt" pattern="HH:mm"
+                                    value="#{compromisoBean.comp.hora}" 
+                                    required="true" requiredMessage="Preencha o campo Hora Inicial!"/>  
+                    </h:panelGrid>
+                    <center >
+                        <p:commandButton value="Salvar" action="#{compromisoBean.salvarCambio()}" 
+                                         icon="ui-icon-disk" ajax="false" update="mensagens"/>
+                        
+                        <p:commandButton value="Voltar" action="#{compromisoBean.voltar()}"
+                                         process="@this" icon="ui-icon-arrowreturnthick-1-e"
+                                         onclick="#{compromisoBean.camposObrigatorio(false)}" />
+                    </center> 
+                </p:panel>
+                
+            </h:form>
+        </center>
+    </ui:define>
+</ui:composition>
+
+

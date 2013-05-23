@@ -21,17 +21,17 @@
         <p:layout fullPage="true" style="min-width:1035px;max-width:1035px;min-height:600px">
 
             <p:layoutUnit position="north" size="245">
-                <a href="agenda.xhtml">
-                   <div class="cabecalho">
+                <p:commandLink action="#{redirecionamentosBean.cliqueiNoBanner()}" process="@this">
+                    <div class="cabecalho" >
                         <p:panel header="Su agenda de compromisos online! é"  >
                             <center class="body">
 
-                                <h:graphicImage url="resources/imagenes/topo.jpg"/> 
+                                <h:graphicImage url="resources/imagenes/topo.jpg" style="border: 0"/> 
 
                             </center>
                         </p:panel>
                     </div>
-                </a>
+                </p:commandLink>
                 <h:form rendered="#{!redirecionamentosBean.isPaginaCadastro()}">
                     <div style="float:left; " >
                         <p:commandButton value="Nuevo Compromiso" image="ui-icon-calendar" 

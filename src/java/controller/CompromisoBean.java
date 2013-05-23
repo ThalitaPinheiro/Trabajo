@@ -22,18 +22,19 @@ import utils.Mensagens;
  * @author Thalita
  */
 @ManagedBean(name = "compromisoBean")
-@ViewScoped
+@SessionScoped
 public class CompromisoBean {
-    
+
     static Pessoa usuario;
     private Pessoa user = new Pessoa();
     private CompromisoDAOImpl daoCompromiso = new CompromisoDAOImpl();
     private Compromisso compromisso = new Compromisso();
     private List<Compromisso> agenda = new ArrayList<Compromisso>();
     private boolean camposObg = true;
+    private static Compromisso comp;
 
     public CompromisoBean() {
-        
+
         user = usuario;
         if (usuario == null) {
             RedirecionamentosBean.pageError();
@@ -41,6 +42,14 @@ public class CompromisoBean {
         }
         camposObg = true;
         agenda = daoCompromiso.listAllCompromissosUser(usuario);
+    }
+
+    public static Compromisso getComp() {
+        return comp;
+    }
+
+    public static void setComp(Compromisso comp) {
+        CompromisoBean.comp = comp;
     }
 
     public boolean isCamposObrigatorios() {
@@ -90,42 +99,41 @@ public class CompromisoBean {
     public static void setUsuario(Pessoa usuario) {
         CompromisoBean.usuario = usuario;
     }
-    
-    public String logout()
-    {
-        usuario=null;
+
+    public String logout() {
+        usuario = null;
         return "index?faces-redirect=true";
     }
-    
+
     public String salvar() {
         //this.removeMascara();
         compromisso.setUsuario(usuario);
-        try{
-        compromisso = daoCompromiso.save(compromisso);
-        }catch(Exception x){
-             FacesContext context = FacesContext.getCurrentInstance();
-             context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "Error"));
-             Mensagens.avisoErro("Ocorrió un error y no fué possible salvar");
+        try {
+            compromisso = daoCompromiso.save(compromisso);
+        } catch (Exception x) {
+            FacesContext context = FacesContext.getCurrentInstance();
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "Error"));
+            Mensagens.avisoErro("Ocorrió un error y no fué possible salvar");
         }
-            agenda.clear();
-            agenda = daoCompromiso.listAllCompromissosUser(usuario);
-            return "agenda?faces-redirect=true";
+        agenda.clear();
+        agenda = daoCompromiso.listAllCompromissosUser(usuario);
+        return "agenda?faces-redirect=true";
 
     }
 
-    public String deletar() {       
-        daoCompromiso.delete(compromisso);        
+    public String deletar() {
+        daoCompromiso.delete(compromisso);
         daoCompromiso = new CompromisoDAOImpl();
         agenda.clear();
         agenda = daoCompromiso.listAllCompromissosUser(usuario);
-        
+
         return "agenda?faces-redirect=true";
 
     }
 
     public String nuevoCompromiso() {
         if (usuario == null) {
-            Mensagens.avisoErro("No tiene permision para hacer esto."); 
+            Mensagens.avisoErro("No tiene permision para hacer esto.");
             return "/faces/acessDenied?faces-redirect=true";
         } else {
             compromisso = new Compromisso();
@@ -152,5 +160,24 @@ public class CompromisoBean {
 
     public void camposObrigatorio(boolean x) {
         camposObg = x;
+    }
+
+   public String paginaAlterar(){
+     
+        return "editarCompromiso?faces-redirect=true";    
+    }
+    
+    public String salvarCambio() {
+        try {
+            compromisso = daoCompromiso.update(compromisso);
+        } catch (Exception x) {
+            FacesContext context = FacesContext.getCurrentInstance();
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "Error"));
+            Mensagens.avisoErro("Ocorrió un error y no fué possible cambiar");
+        }
+        agenda.clear();
+        agenda = daoCompromiso.listAllCompromissosUser(user);
+        return "agenda?faces-redirect=true";
+
     }
 }

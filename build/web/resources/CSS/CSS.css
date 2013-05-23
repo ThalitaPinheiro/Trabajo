@@ -1,0 +1,23 @@
+/* 
+    Document   : CSS
+    Created on : 27/Mar/2013, 23:06:22
+    Author     : Thalita
+    Description:
+        Purpose of the stylesheet follows.
+*/
+@charset "utf-8";  
+/* CSS Document */  
+root { 
+    display: table;
+}
+
+cabecalho h1{
+                margin-top: 0;
+                margin-bottom: 0;
+                text-align: center; 
+
+            }
+            
+.teste {
+    background-color: #A9B2BB !important; font-size: 12px
+}

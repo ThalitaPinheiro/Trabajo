@@ -54,6 +54,18 @@
                             </p:commandButton> 
 
                         </p:column>
+                        
+                        <p:column style="text-align: center;width:6%"  rendered="false">
+                            <f:facet name="header">
+                                <h:outputText value="Edit"/>
+                            </f:facet>
+                            <p:commandButton icon="ui-icon-pencil" title="Editar Informaciones" 
+                                             action="#{compromisoBean.paginaAlterar()}">  
+                                <f:setPropertyActionListener value="#{comp}" target="#{compromisoBean.compromisso}" /> 
+                                
+                            </p:commandButton> 
+
+                        </p:column>
 
                         <p:column style="text-align: center;width:6%" >
                             <f:facet name="header">
@@ -61,7 +73,7 @@
                             </f:facet>
                             <p:commandButton icon="ui-icon-trash" title="Más Informaciones" id="deletComp" 
                                              onclick="confirmation.show()" >  
-                                <f:setPropertyActionListener value="#{comp}" target="#{compromisoBean.compromisso}" />  
+                                <f:setPropertyActionListener value="#{comp}" target="#{CompromisoBean.comp}" />  
                             </p:commandButton> 
 
                         </p:column>
