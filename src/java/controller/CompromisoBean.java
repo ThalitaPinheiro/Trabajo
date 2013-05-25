@@ -122,18 +122,26 @@ public class CompromisoBean {
     }
 
     public String deletar() {
-        daoCompromiso.delete(compromisso);
+        try {
+           daoCompromiso.delete(compromisso); 
+        } catch (Exception e) {
+            FacesMessage message = new FacesMessage(null,"Ocorrió un error."+e);
+            FacesContext.getCurrentInstance().addMessage(null, message);
+        }
+          
+        compromisso=new Compromisso();
         daoCompromiso = new CompromisoDAOImpl();
         agenda.clear();
         agenda = daoCompromiso.listAllCompromissosUser(usuario);
 
-        return "agenda?faces-redirect=true";
+        return "/faces/agenda?faces-redirect=true";
 
     }
 
     public String nuevoCompromiso() {
         if (usuario == null) {
-            Mensagens.avisoErro("No tiene permision para hacer esto.");
+            FacesMessage message = new FacesMessage(null,"No tiene permision para hacer esto.");
+            FacesContext.getCurrentInstance().addMessage(null, message);
             return "/faces/acessDenied?faces-redirect=true";
         } else {
             compromisso = new Compromisso();

@@ -10,9 +10,9 @@
             <h:form id="form">
                 <p:growl id="messages" />
                 <p:panel header="Agenda de #{compromisoBean.user.nome} ">
-                   
+
                     <p:dataTable id="tabela" var="comp" resizableColumns="false" 
-                                 value="#{compromisoBean.agenda}"
+                                 value="#{compromisoBean.agenda}" widgetVar="tabelaComp"
                                  paginator="true" rowsPerPageTemplate="10,15,20"
                                  paginatorTemplate="{CurrentPageReport}  {FirstPageLink} 
                                  {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} 
@@ -24,6 +24,13 @@
                             Compromisos almacenados 
                         </f:facet>  
 
+                        <f:facet name="footer">  
+                            <p:outputPanel>  
+                                <h:outputText value="Procurar:" />  
+                                <p:inputText id="globalFilter" onkeyup="tabelaComp.filter()" style="width:150px" />  
+                            </p:outputPanel>  
+                        </f:facet> 
+                        
                         <p:column style="text-align: center" filterBy="#{comp.titulo}"> 
                             <f:facet name="header">
                                 <h:outputText value="Título"/>
@@ -31,18 +38,22 @@
                             <h:outputText value="#{comp.titulo}" />
                         </p:column>
 
-                        <p:column style="text-align: center;width:10%" filterBy="">
+                        <p:column style="text-align: center;width:10%" filterBy="#{comp.dia}" filterOptions="">
                             <f:facet name="header">
                                 <h:outputText value="Data"/>
                             </f:facet>
-                            <h:outputText value="#{comp.dia}"  />
+                            <h:outputText value="#{comp.dia}"  >
+                                <f:convertDateTime locale="pt,BR" dateStyle="long" pattern="dd/MM/yyyy"/>
+                            </h:outputText>
                         </p:column>
 
-                        <p:column style="text-align: center;width:10%" filterBy="">
+                        <p:column style="text-align: center;width:10%" >
                             <f:facet name="header">
                                 <h:outputText value="Hora"/>
                             </f:facet>
-                            <h:outputText value="#{comp.hora}" />
+                            <h:outputText value="#{comp.hora}" >
+                                <f:convertDateTime locale="pt,BR" dateStyle="long" pattern="HH:mm"/>
+                            </h:outputText>
                         </p:column>
 
                         <p:column style="text-align: center;width:6%" >
@@ -55,7 +66,7 @@
                             </p:commandButton> 
 
                         </p:column>
-                        
+
                         <p:column style="text-align: center;width:6%"  rendered="false">
                             <f:facet name="header">
                                 <h:outputText value="Edit"/>
@@ -63,7 +74,7 @@
                             <p:commandButton icon="ui-icon-pencil" title="Editar Informaciones" 
                                              action="#{compromisoBean.paginaAlterar()}">  
                                 <f:setPropertyActionListener value="#{comp}" target="#{compromisoBean.compromisso}" /> 
-                                
+
                             </p:commandButton> 
 
                         </p:column>
@@ -74,7 +85,8 @@
                             </f:facet>
                             <p:commandButton icon="ui-icon-trash" title="Más Informaciones" id="deleteComp" 
                                              onclick="confirmation.show()" >  
-                                <f:setPropertyActionListener value="#{comp}" target="#{CompromisoBean.comp}" />  
+
+                                <f:setPropertyActionListener value="#{comp}" target="#{compromisoBean.compromisso}" />  
                             </p:commandButton> 
 
                         </p:column>
@@ -111,7 +123,7 @@
                             </h:panelGrid>             
 
                         </p:dialog>
-                        
+
                     </center>
                 </p:panel>
             </h:form>
