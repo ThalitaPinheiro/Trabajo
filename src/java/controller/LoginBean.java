@@ -66,7 +66,7 @@ public class LoginBean {
                 
                 HttpServletResponse response = (HttpServletResponse) context.getExternalContext().getResponse();
                 Cookie cookie = new Cookie("nombre_user", user.getEmail());
-                cookie.setMaxAge(9999);
+                cookie.setMaxAge(60*3);
                 response.addCookie(cookie);
                 
                 return "agenda?faces-redirect=true";
