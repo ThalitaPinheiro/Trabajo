@@ -10,6 +10,7 @@
             <h:form id="form">
                 <p:growl id="messages" />
                 <p:panel header="Agenda de #{compromisoBean.user.nome} ">
+                   
                     <p:dataTable id="tabela" var="comp" resizableColumns="false" 
                                  value="#{compromisoBean.agenda}"
                                  paginator="true" rowsPerPageTemplate="10,15,20"
@@ -49,7 +50,7 @@
                                 <h:outputText value="Más..."/>
                             </f:facet>
                             <p:commandButton icon="ui-icon-plus" title="Más Informaciones" id="selectButton" 
-                                             update=":form:display" oncomplete="compDialog.show()" >  
+                                             update=":form:display" onclick="compDialog.show()" >  
                                 <f:setPropertyActionListener value="#{comp}" target="#{compromisoBean.compromisso}" />  
                             </p:commandButton> 
 
@@ -71,7 +72,7 @@
                             <f:facet name="header">
                                 <h:outputText value="Deletar"/>
                             </f:facet>
-                            <p:commandButton icon="ui-icon-trash" title="Más Informaciones" id="deletComp" 
+                            <p:commandButton icon="ui-icon-trash" title="Más Informaciones" id="deleteComp" 
                                              onclick="confirmation.show()" >  
                                 <f:setPropertyActionListener value="#{comp}" target="#{CompromisoBean.comp}" />  
                             </p:commandButton> 
@@ -110,6 +111,7 @@
                             </h:panelGrid>             
 
                         </p:dialog>
+                        
                     </center>
                 </p:panel>
             </h:form>
