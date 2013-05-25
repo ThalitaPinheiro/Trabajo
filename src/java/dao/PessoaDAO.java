@@ -12,4 +12,6 @@ import model.Pessoa;
  */
 
 public interface PessoaDAO extends GenericDAO<Pessoa, Integer> {
+    public abstract Pessoa getPessoaByEmail(String email);
+    public abstract void mataSession();
 }

@@ -5,6 +5,9 @@
 package dao.impl;
 
 import dao.CompromisoDAO;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import model.Compromisso;
 import model.Pessoa;
@@ -29,9 +32,21 @@ public class CompromisoDAOImpl extends GenericDAOImpl<Compromisso, Integer> impl
     public CompromisoDAOImpl() {
     }
    
+    @Override
     public List<Compromisso> listAllCompromissosUser(Pessoa user) {
         ss = HibernateUtil.getSessionFactory().openSession();
-        return ss.createCriteria(Compromisso.class).add(
-                Restrictions.eq("usuario", user)).addOrder(Order.asc("dia")).list();
+         Criteria c = ss.createCriteria(Compromisso.class);
+         Criterion USER =  Restrictions.eq("usuario", user);
+         c.add(USER);
+         
+//         Date data = new Date();            
+//         Criterion DIA = Restrictions.sqlRestriction(" dia > " + data);
+//         c.add(DIA);
+         
+         c.addOrder(Order.asc("dia"));
+         
+         return c.list();
     }
 }
+
+
