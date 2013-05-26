@@ -22,7 +22,7 @@ import utils.Mensagens;
  * @author Thalita
  */
 @ManagedBean(name = "compromisoBean")
-@SessionScoped
+@ViewScoped
 public class CompromisoBean {
 
     static Pessoa usuario;
@@ -100,10 +100,10 @@ public class CompromisoBean {
         CompromisoBean.usuario = usuario;
     }
 
-    public String logout() {
-        usuario = null;
-        return "index?faces-redirect=true";
-    }
+//    public String logout() {
+//        usuario = null;
+//        return "index?faces-redirect=true";
+//    }
 
     public String salvar() {
         //this.removeMascara();

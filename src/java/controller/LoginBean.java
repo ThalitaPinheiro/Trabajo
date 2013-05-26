@@ -72,6 +72,12 @@ public class LoginBean {
         }
     }
 
+    public String logout() {
+        dao.mataSession();
+        CompromisoBean.usuario = null;
+        return "index?faces-redirect=true";
+    }
+
     public void camposObrigatorio(boolean bool) {
         camposNecessarios = bool;
     }

@@ -1,4 +1,3 @@
-
 package dao.impl;
 
 /**
@@ -18,18 +17,21 @@ public class PessoaDAOImpl extends GenericDAOImpl<Pessoa, Integer> implements Pe
 
     Session ss = null;
     Transaction tx = null;
-    
+
     public PessoaDAOImpl() {
     }
-    
-    public Pessoa getPessoaByEmail(String email)
-    {
+
+    public Pessoa getPessoaByEmail(String email) {
         ss = HibernateUtil.getSessionFactory().openSession();
         Criteria c = ss.createCriteria(Pessoa.class);
-        Criterion EMAIL = Restrictions.eq("email", email);  
+        Criterion EMAIL = Restrictions.eq("email", email);
         c.add(EMAIL);
-        return (Pessoa) c.uniqueResult();           
+        return (Pessoa) c.uniqueResult();
     }
-    
-   
+
+    public void mataSession() {
+        ss = null;
+        tx = null;
+
+    }
 }
