@@ -13,6 +13,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import utils.HibernateUtil;
 
@@ -30,6 +31,7 @@ public class CompromisoDAOImpl extends GenericDAOImpl<Compromisso, Integer> impl
    
     public List<Compromisso> listAllCompromissosUser(Pessoa user) {
         ss = HibernateUtil.getSessionFactory().openSession();
-        return ss.createCriteria(Compromisso.class).add(Restrictions.eq("usuario", user)).list();
+        return ss.createCriteria(Compromisso.class).add(
+                Restrictions.eq("usuario", user)).addOrder(Order.asc("dia")).list();
     }
 }

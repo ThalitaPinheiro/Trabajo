@@ -122,10 +122,10 @@ public class CompromisoBean {
     }
 
     public String deletar() {
-        daoCompromiso.delete(compromisso);
-        daoCompromiso = new CompromisoDAOImpl();
-        agenda.clear();
-        agenda = daoCompromiso.listAllCompromissosUser(usuario);
+//        daoCompromiso.delete(compromisso);
+//        daoCompromiso = new CompromisoDAOImpl();
+//        agenda.clear();
+//        agenda = daoCompromiso.listAllCompromissosUser(usuario);
 
         return "agenda?faces-redirect=true";
 
