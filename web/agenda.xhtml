@@ -37,13 +37,22 @@
                             </f:facet>
                             <h:outputText value="#{comp.titulo}" />
                         </p:column>
+                        
+                        <p:column style="text-align: center;width:10%" filterBy="#{comp.status}" filterOptions="">
+                            <f:facet name="header">
+                                <h:outputText value="Prioridad"/>
+                            </f:facet>
+                            <center>
+                            <p:rating value="#{comp.status}" readonly="true" ></p:rating>
+                              </center>  
+                        </p:column>
 
                         <p:column style="text-align: center;width:10%" filterBy="#{comp.dia}" filterOptions="">
                             <f:facet name="header">
                                 <h:outputText value="Data"/>
                             </f:facet>
                             <h:outputText value="#{comp.dia}"  >
-                                <f:convertDateTime locale="pt,BR" dateStyle="long" pattern="dd/MM/yyyy"/>
+                                <f:convertDateTime pattern="dd/MM/yyyy"/>
                             </h:outputText>
                         </p:column>
 
@@ -52,7 +61,7 @@
                                 <h:outputText value="Hora"/>
                             </f:facet>
                             <h:outputText value="#{comp.hora}" >
-                                <f:convertDateTime locale="pt,BR" dateStyle="long" pattern="HH:mm"/>
+                               
                             </h:outputText>
                         </p:column>
 

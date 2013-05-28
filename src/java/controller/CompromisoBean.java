@@ -36,10 +36,6 @@ public class CompromisoBean {
     public CompromisoBean() {
 
         user = usuario;
-        if (usuario == null) {
-            RedirecionamentosBean.pageError();
-            return;
-        }
         camposObg = true;
         agenda = daoCompromiso.listAllCompromissosUser(usuario);
     }
@@ -104,7 +100,6 @@ public class CompromisoBean {
 //        usuario = null;
 //        return "index?faces-redirect=true";
 //    }
-
     public String salvar() {
         //this.removeMascara();
         compromisso.setUsuario(usuario);
@@ -123,24 +118,23 @@ public class CompromisoBean {
 
     public String deletar() {
         try {
-           daoCompromiso.delete(compromisso); 
+            daoCompromiso.delete(compromisso);
         } catch (Exception e) {
-            FacesMessage message = new FacesMessage(null,"Ocorrió un error."+e);
+            FacesMessage message = new FacesMessage(null, "Ocorrió un error." + e);
             FacesContext.getCurrentInstance().addMessage(null, message);
         }
-          
-        compromisso=new Compromisso();
+        compromisso = new Compromisso();
         daoCompromiso = new CompromisoDAOImpl();
         agenda.clear();
         agenda = daoCompromiso.listAllCompromissosUser(usuario);
-
-        return "/faces/agenda?faces-redirect=true";
+        
+        return "agenda?faces-redirect=true";
 
     }
 
     public String nuevoCompromiso() {
         if (usuario == null) {
-            FacesMessage message = new FacesMessage(null,"No tiene permision para hacer esto.");
+            FacesMessage message = new FacesMessage(null, "No tiene permision para hacer esto.");
             FacesContext.getCurrentInstance().addMessage(null, message);
             return "/faces/acessDenied?faces-redirect=true";
         } else {
@@ -170,11 +164,11 @@ public class CompromisoBean {
         camposObg = x;
     }
 
-   public String paginaAlterar(){
-     
-        return "editarCompromiso?faces-redirect=true";    
+    public String paginaAlterar() {
+
+        return "editarCompromiso?faces-redirect=true";
     }
-    
+
     public String salvarCambio() {
         try {
             compromisso = daoCompromiso.update(compromisso);

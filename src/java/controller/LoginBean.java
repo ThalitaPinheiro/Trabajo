@@ -60,13 +60,12 @@ public class LoginBean {
         if (p != null) {
             String hash = Seguridad.criptografar(user.getEmail(), user.getSenha());
             if (p.getSenhaBanco().equals(hash)) {
-                System.out.print("AAAAAAAAAAAAAAAEEEEEEEEEEEEEOOOOOOOOOOOOOWWWWWWWWWWWW");
                 CompromisoBean.setUsuario(p);
                 RedirecionamentosBean.setPaginaCadastro(false);
                 
                 HttpServletResponse response = (HttpServletResponse) context.getExternalContext().getResponse();
                 Cookie cookie = new Cookie("nombre_user", user.getEmail());
-                cookie.setMaxAge(60*3);
+                cookie.setMaxAge(60);
                 response.addCookie(cookie);
                 
                 return "agenda?faces-redirect=true";

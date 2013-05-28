@@ -10,14 +10,8 @@ package controller;
  */
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
-import javax.faces.bean.ViewScoped;
 
-/**
- *
- * @author arthur
- */
 
 @ManagedBean (name ="redirecionamentosBean")
 @SessionScoped
@@ -43,9 +37,12 @@ public class RedirecionamentosBean {
         return "cadastro.xhtml?faces-redirect=true";
     }
     
-    public static String pageError()
-    {
-        return "accessDenied?faces-redirect=true";
+    public String pageError(){
+        if (CompromisoBean.usuario==null){
+            return "accessDenied?faces-redirect=true";
+        }else {
+            return "/Trabajo/faces/agenda.xhtml";
+        }     
     }
     
     public String voltarPaginaLogin()
