@@ -1,18 +1,14 @@
 package controller;
 
-import com.sun.xml.rpc.client.http.CookieJar;
 import dao.impl.PessoaDAOImpl;
 import java.util.Map;
 import javax.faces.application.FacesMessage;
 import model.Pessoa;
 import utils.Mensagens;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
-import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import seguridad.Seguridad;
 
@@ -85,8 +81,8 @@ public class LoginBean {
 
     public String logout() {
         dao.mataSession();
-        CompromisoBean.usuario = null;
-        return "index?faces-redirect=true";
+        CompromisoBean.usuario = new Pessoa();  
+        return "/index?faces-redirect=true";
     }
 
     public void camposObrigatorio(boolean bool) {

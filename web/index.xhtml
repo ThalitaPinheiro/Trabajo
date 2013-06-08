@@ -20,7 +20,7 @@
         <p:layout fullPage="true" style="min-width:500px;max-width:1035px;min-height:600px">
 
             <p:layoutUnit position="north" size="215" >
-                <a href="index.xhtml">
+                <p:commandLink action="#{redirecionamentosBean.cliqueiNoBanner()}" process="@this">
                     <div class="cabecalho">
                         <p:panel header="Su agenda de compromisos online!"  >
                             <center class="body" >
@@ -29,7 +29,7 @@
                             </center>
                         </p:panel>
                     </div>
-                </a>
+                </p:commandLink>
                 <h:form rendered="false">
                     <div style="float:right">
                         <p:commandButton value="Sair" image="ui-icon-power" action="#{redirecionamentosBean.logout()}" ajax="false"

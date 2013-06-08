@@ -1,11 +1,18 @@
-<html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-        <title>Permissão Negada</title>
-    </head>
-    <body>
-        <div>
-            <center><h1 style="font-size: 56px ">Ops...</h1></center>
-            <center><h2 style="font-size: 56px ">Tú no tiene permisión para acesar esta página.</h2></center>
-        </div>
-    </body>
-</html>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/WEB-INF/template.xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core">
+    <ui:define name="titulo"> Registro de usuario </ui:define>
+    <ui:define name="corpo" >
+        <center>
+            <h:form id="formPrincipal">
+                <div>
+                    <center><h1 style="font-size: 56px ">Ops...</h1></center>
+                    <center><h2 style="font-size: 56px ">Tú no tiene permisión para acesar esta página.</h2></center>
+                </div>
+            </h:form>
+        </center>
+    </ui:define>
+</ui:composition>
