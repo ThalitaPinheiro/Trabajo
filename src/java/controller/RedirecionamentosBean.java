@@ -38,13 +38,12 @@ public class RedirecionamentosBean {
         if (isPaginaCadastro()) {
             return "cadastro.xhtml?faces-redirect=true";
         } else {
-            if (CompromisoBean.usuario==null) {
-                System.out.println("nuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuullllllllllll");
+            try {
+                CompromisoBean.usuario.getNome();
+            } catch (Exception e) {
                 return "/faces/index.xhtml?faces-redirect=true";
-            } else {
-                System.out.println("naaaaaaaaaaaaaaaaaaaaoooooooooooooo");
-                return "/Trabajo/faces/agenda.xhtml";
             }
+            return "/Trabajo/faces/agenda.xhtml";
         }
     }
 

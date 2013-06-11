@@ -125,10 +125,10 @@ public class CompromisoBean {
         }
         compromisso = new Compromisso();
         daoCompromiso = new CompromisoDAOImpl();
-        agenda.clear();
+        agenda= new ArrayList<Compromisso>();
         agenda = daoCompromiso.listAllCompromissosUser(usuario);
         
-        return "agenda?faces-redirect=true";
+        return "/faces/agenda?faces-redirect=true";
 
     }
 

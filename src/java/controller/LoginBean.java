@@ -21,6 +21,7 @@ public class LoginBean {
     private boolean camposNecessarios = true;
 
     public LoginBean() {
+        CompromisoBean.usuario= new Pessoa();
         user = new Pessoa();
         dao = new PessoaDAOImpl();
     }
