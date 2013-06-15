@@ -21,7 +21,7 @@ import seguridad.Seguridad;
 import utils.Mensagens;
 
 @ManagedBean
-@SessionScoped
+@ViewScoped
 public class PessoaBean {
 
     Pessoa pessoa;
@@ -75,6 +75,8 @@ public class PessoaBean {
         {   
             Mensagens.aviso("Usuário incluído com sucesso!");
             FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);//put("pessoaBean", this);
+            pessoa=new Pessoa();
+            daoPessoa=new PessoaDAOImpl();
             return "index?faces-redirect=true";
         }
         else

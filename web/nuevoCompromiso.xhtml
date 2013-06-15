@@ -43,7 +43,7 @@
                         <h:outputText value="Dia:" />
                         <p:calendar value="#{compromisoBean.compromisso.dia}" navigator="true"                                              
                                     required="true"  locale="pt_BR" pattern="dd/MM/yyyy"
-                                    mindate="Calendar.getInstance();"
+                                    mindate="Calendar.getInstance();" onfocus="Calendar.getInstance();"
                                     requiredMessage="Hay que inserir el dia del compromiso."/>
                         <h:outputLabel value="Hora:"/>
                         <p:calendar id="horaInicial" timeOnly="true" locale="pt" pattern="HH:mm"

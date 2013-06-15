@@ -53,10 +53,18 @@ public class RedirecionamentosBean {
     }
 
     public String cliqueiNoBanner() {
-        if (CompromisoBean.usuario == null) {
-            return "index?faces-redirect=true";
-        } else {
-            return "agenda?faces-redirect=true";
+        boolean index = false;
+        try {
+            if (CompromisoBean.usuario.getEmail() != null) {
+                index = true;
+            }
+        } finally {
+            if (index) {
+                return "agenda?faces-redirect=true";
+            } else {
+                return "index?faces-redirect=true";
+            }
         }
+
     }
 }

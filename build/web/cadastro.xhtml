@@ -21,7 +21,7 @@
                         <p:inputText  id="email" value="#{pessoaBean.pessoa.email}"
                                       required="true" requiredMessage="Hay de digitar un correo valido."
                                       validatorMessage="Hay de digitar un correo valido." immediate="true"> 
-                            <f:validateRegex pattern="[a-zA-Z0-9\-\_.]+@[a-zA-Z0-9\-\_.]+.+[a-zA-Z0-9\-\_.]" />
+                            <f:validateRegex pattern="[a-zA-Z0-9\-\_.]+@[a-zA-Z0-9\-\_]+.+[a-zA-Z0-9\-\_.]" />
                             <p:ajax event="blur" update="mensagens,email" />
                         </p:inputText>
 
