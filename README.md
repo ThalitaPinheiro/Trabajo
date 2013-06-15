@@ -18,4 +18,3 @@ He añadido el modelo de la base de datos (hecha en el Workbench) y el script de 
 Las librarias , caso sea necesario, estan duplicadas en el proyecto. He ponido ellas en una carpeta con el nombre de "lib", dentro de la carpeta principal del proyecto. 
 He hecho eso porque he tenido problemas de reconocimiento de las libs cuando he bajado el proyecto en otro ordenador. 
 Entonces, creo que sea mejor asi, para que sea mas sencillo a localización de las librarias.
-===
