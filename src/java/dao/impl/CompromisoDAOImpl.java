@@ -5,14 +5,10 @@
 package dao.impl;
 
 import dao.CompromisoDAO;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import model.Compromisso;
 import model.Pessoa;
 import org.hibernate.Criteria;
-import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Criterion;

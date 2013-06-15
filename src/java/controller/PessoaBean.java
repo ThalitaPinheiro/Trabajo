@@ -8,12 +8,9 @@ package controller;
  *
  * @author Thalita
  */
-import dao.PessoaDAO;
 import dao.impl.PessoaDAOImpl;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
-import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import model.Pessoa;

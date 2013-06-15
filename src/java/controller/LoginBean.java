@@ -3,14 +3,14 @@ package controller;
 import dao.impl.PessoaDAOImpl;
 import java.util.Map;
 import javax.faces.application.FacesMessage;
-import model.Pessoa;
-import utils.Mensagens;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
+import model.Pessoa;
 import seguridad.Seguridad;
+import utils.Mensagens;
 
 @ManagedBean(name = "loginBean")
 @ViewScoped
